@@ -2,16 +2,28 @@ import { supabase } from './supabase.js'
 import { getUser } from './auth.js'
 
 
-export async function createPost(text) {
-const user = await getUser()
-if (!user) throw new Error('Não autenticado')
+window.createPost = async function () {
+  const content = document.getElementById('post-content').value
 
+  if (!content) return alert('Write something')
 
-await supabase.from('posts').insert({
-content: text,
-user_email: user.email
-})
+  const { data: user } = await supabase.auth.getUser()
+
+  const { error } = await supabase
+    .from('posts')
+    .insert({
+      content,
+      user_id: user.user.id
+    })
+
+  if (error) {
+    alert(error.message)
+  } else {
+    document.getElementById('post-content').value = ''
+    loadFeed()
+  }
 }
+
 
 
 export async function loadFeed(containerEl) {
