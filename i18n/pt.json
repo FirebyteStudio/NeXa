@@ -3,5 +3,8 @@
   "subtitle": "Conecte. Crie. Compartilhe.",
   "login": "Entrar",
   "signup": "Criar conta",
-  "feed": "Feed"
+  "email": "Email",
+  "password": "Senha",
+  "feed": "Feed",
+  "post_placeholder": "O que você está pensando?"
 }
